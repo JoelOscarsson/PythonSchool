@@ -1,0 +1,5 @@
+print(pokedex["Gengar"])
+print(pokedex["Pikachu"])
+
+Spöke/Gift, 94
+Elektrisk, 25
