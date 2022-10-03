@@ -31,8 +31,8 @@ class TestVector(unittest.TestCase):
 
     def test_create_2D_vector(self):
         """Testing numbers property"""
-        v = Vector(1,2)
-        self.assertEqual(v.numbers, (1,2))
+        v = self.create_2D_vector()
+        self.assertEqual(v.numbers, (self.x, self.y))
 
     def test_create_3D_vector(self):
         v = Vector(1,2,3)
