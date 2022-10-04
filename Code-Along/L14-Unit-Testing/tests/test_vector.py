@@ -25,7 +25,7 @@ class TestVector(unittest.TestCase):
 
     # Can be used to create default 2D vector for testing
     def create_2D_vector(self) -> Vector:
-        #v = Vector(1,2)
+        v = Vector(1,2)
         self.assertEqual(v.numbers, (self.x, self.y))
         return Vector(self.x, self.y)
 
