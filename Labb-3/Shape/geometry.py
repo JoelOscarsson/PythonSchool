@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+
+# Super class shape
 class shape: # Ska göra stor bokstav
 
     def __init__(self, x_pos: (int | float), y_pos: (int | float)):
