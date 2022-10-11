@@ -1,6 +1,6 @@
+from __future__ import annotations
 from geometry import Shapes
 from math import pi
-from __future__ import annotations
 
 
 ###KANSKE MÅSTE ÄNDRA VARIABEL NAMN PÅ X_POS OCH Y_POS FÖR DE ÄR ÄNDRADE I GEOMEtry
@@ -67,4 +67,16 @@ class Circle(Shapes):
     # TODO: När jag gör felhantering så måste jag se till så jag importerar från rätt ställe osv...
     # TODO: Kanske måste ändra variablerna x och y nedanför bara för att jag ändrade dem i geometry(KOLLA MED KOKCHUN KANSKE?)
 
-    def is_circle_inside(self, x , y)
+    def is_it_enhetscirkel(self) -> bool:
+        """ Kollar om cirkeln är en enhetscirkel med radie1 vid origo"""
+        if self.radius == 1 and self.x == 0 and self.y == 0:
+            return True
+        else:
+            return False
+
+    
+    ######## KUDOS to Daniel from this code solution calculating distance between two points####################
+    def is_inside_cirle(self, x, y):
+        """ Kollar om en viss punkt punkt befinner sig innanför objektet """
+        return (x - self.x_pos)**2 + (y - self.y_pos)**2 < self.radius**2
+    
