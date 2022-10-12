@@ -62,10 +62,6 @@ class Circle(Shapes):
 
 
     # --------------------------------------------------------
-    # TODO Hur checkar man så cirkel är inside e
-    # TODO: Gör fel hantering av cirkel klassen igen efter att ha ändrat i koden
-    # TODO: När jag gör felhantering så måste jag se till så jag importerar från rätt ställe osv...
-    # TODO: Kanske måste ändra variablerna x och y nedanför bara för att jag ändrade dem i geometry(KOLLA MED KOKCHUN KANSKE?)
 
     def is_it_enhetscirkel(self) -> bool:
         """ Kollar om cirkeln är en enhetscirkel med radie1 vid origo"""

@@ -1,7 +1,3 @@
-#TODO Skapa en parent klass shape
-#TODO Skapa x_pos och y_pos koordinaterna som en int
-#TODO Lägg in property för att utvidja funktioner och skrivskydda grundkoden
-
 from __future__ import annotations
 
 
