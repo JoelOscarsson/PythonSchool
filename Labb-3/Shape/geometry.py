@@ -1,12 +1,10 @@
 from __future__ import annotations
 from math import pi
-from copy import copy 
 
 # Super class Shapes
 class Shapes:
 
     def __init__(self, x_pos: (int | float), y_pos: (int | float)):
-        print("__init__")
         self.x_pos = x_pos
         self.y_pos = y_pos
 
@@ -20,11 +18,11 @@ class Shapes:
 
     #----- Getter and Setter for x_pos
     @property
-    def x_pos(self) ->(int | float):
+    def x_pos(self) -> int | float:
         return self._x_pos
 
     @x_pos.setter
-    def x_pos(self, value: (int | float)):
+    def x_pos(self, value: int | float) -> int | float:
         #must be a number:
         print("x_pos.setter")
         if not isinstance(value, (int, float)):
@@ -36,45 +34,54 @@ class Shapes:
 
     #------- Getter and setter for y_pos
     @property
-    def y_pos(self) -> (int | float):
+    def y_pos(self) -> int | float:
     #Read and write for y_pos
         return self._y_pos
 
     @y_pos.setter
-    def y_pos(self, value: (int | float)):
-        print("y_pos.setter")
-        if not isinstance(value, int, float):
+    def y_pos(self, value: int | float) -> int | float:
+        if not isinstance(value, (int, float)):
             raise TypeError(f"y_pos input must be a number, not {type(value)}")
-        
         #Round to 1 decimal
         self._y_pos = round(value, 1)
+        
 
     #---- Overload --------------------------------------------------
 
-    def __lt__(self, other: Shapes) -> bool:
-        """Checks lesser than operator for all shapes"""
-        return self.area > other.area
+    def __lt__(self, other) -> bool:
+        """Compares if shape is lesser to shape"""
+        if type(self) == type(other):
+            return self.area < other.area
+        return False
 
-    def __gt__(self, other: Shapes) -> bool:
-        """Checks if greater than to all shapes"""
-        return self.area <= other.area
+    def __gt__(self, other) -> bool:
+        """Checks if shape is bigger to shape"""
+        if type(self) == type(other):
+            return self.area > other.area
+        return False
 
-    def __ge__(self, other: Shapes) -> bool:
-        """Checks if greater or equal to operator to all shapes"""
-        return self.area >= other.area
+    def __ge__(self, other) -> bool:
+        """Checks if shape is less or equal to another shape"""
+        if type(self) == type(other):
+            return self.area >= other.area
+        return False
     
     def __le__(self, other: Shapes) -> bool:
-        """Checks if lesser than or equal to all shapes"""
-        return self.area <= other.area
+        """Checks if shape is more or equal to another shape"""
+        if type(self) == type(other):
+            return self.area <= other.area
+        return False
     
     def __eq__(self, other: Shapes) -> bool:
-        """Checks if its equal to all shapes"""
-        return self.area == other.area
+        """Checks to compare if two shape areas are equal to eachother"""
+        if type(self) == type(other):
+            return self.area == other.area
+        return False
+
 
     #--------- #Translate method ----------
     def translatemethod(self, x_other: int|float, y_other: int|float) -> Shapes:
         """Moves shape from the original position to the new position"""
-        new_shape = copy(self)#KUDOS TO DOROTA FOR THIS LINE OF CODE
         if not isinstance(x_other, (int, float)):
             raise TypeError(f"Number has to be an int or float{type(x_other)}")
         if not isinstance(y_other, (int, float)):
@@ -88,7 +95,7 @@ class Shapes:
 class Circle(Shapes):
     def __init__(self, x_pos: int|float, y_pos: int|float, radius: int|float) -> None:
         super().__init__(x_pos, y_pos)
-        self.radius = radius
+        self._radius = radius
         # No value in area and circum from start
         self._circum = 0
         self._area = 0 
@@ -102,9 +109,9 @@ class Circle(Shapes):
         return self._radius
 
     @radius.setter
-    def radius(self, value: (int | float)):
-        if not isinstance(value, (int | float)):
-            raise TypeError(f"Number has to be an int or float not {type(value)}")
+    def radius(self, value) -> (int | float):
+        if isinstance(value, (int | float)):
+            raise TypeError(f"The radius has to be an int or float not {type(value)}")
         if value <= 0:
             raise ValueError(f"Radius must be more than 0")
         self._radius = value
@@ -112,7 +119,8 @@ class Circle(Shapes):
     @property
     def circum(self) -> (int | float):
         """Circum = Circumference"""
-        return 2 * pi * self.radius
+        return 2*pi*self._radius
+
 
     @property
     def area(self) -> (int | float):
@@ -148,8 +156,8 @@ class Circle(Shapes):
         """ Kollar om en viss punkt punkt befinner sig innanför objektet """
         return (x - self.x_pos)**2 + (y - self.y_pos)**2 < self.radius**2
 
-##_________________________________________________________________________________________________________________
-## _______________________________________REKTANGEL CLASS__________________________________________________________
+#________________________________REKTANGEL CLASS ____________________________________
+
 class Rektangel(Shapes):
     def __init__(self, x_pos: int | float, y_pos: int | float, height: int | float, width: int | float) -> list:
         super().__init__(x_pos, y_pos)
@@ -176,14 +184,14 @@ class Rektangel(Shapes):
         """Width rektangel"""
         return self._width
 
-    ### ISÅFALL HÄR DET FELAR SENARE OM DET ÄR FEL med tanke på (int | float)
     @width.setter
-    def width(self, value: (int | float)):
-        if not isinstance(value):
+    def width(self, value):
+        if not isinstance(value, (float,int)):
             raise TypeError(f"Width must be an int or float ok? Not {type(value)}")
         if value <= 0:
             raise ValueError("Width must be larger than zero")
         self._width = value
+
 
     @property
     def area(self) -> (int | float):
@@ -198,7 +206,8 @@ class Rektangel(Shapes):
 
     #------------------------------------------------
 
-    ### KANSKE FLYTTA NER ÄNNU MER
+
+
     # String conversion
     def __str__(self) -> str:
         """Self as string"""
@@ -207,9 +216,7 @@ class Rektangel(Shapes):
     def __repr__(self) -> (str):
         return "Rektangel x_pos:{self.x_pos}, y_pos:{self.x_pos}, height:({self.height} width:({self.width})"
 
-    ############### KAN BEHÖVA EN EQ HÄR
 
-###################################
     def is_it_square(self) -> bool:
         """Is rektangel a square?"""
         if self._width == self._height:
